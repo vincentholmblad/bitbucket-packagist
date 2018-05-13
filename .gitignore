@@ -51,9 +51,12 @@ node_modules/
 # ignore composer vendor directory
 /vendor
 
+/dist
 /bitbucket_packagist_dist
 satis.json
 bitbucket_packagist.json
+packages.json
+satis.json
 
 
 # ignore components loaded via Bower

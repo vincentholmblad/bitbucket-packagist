@@ -2,9 +2,6 @@
 
 namespace BitbucketPackagist;
 
-define("FILE", "bitbucket_packagist.json");
-define("BASEFILE", "bitbucket_packagist_base.json");
-
 class FileBuilder
 {
 
@@ -13,39 +10,32 @@ class FileBuilder
     public function __construct($params, $composer) {
         $this->params = $params;
         $this->loadGuzzleFunctions($composer);
-        $this->updateIncludeFile();
+        $this->updateSatisFile();
     }
 
-    private function updateIncludeFile() {
-        $data = $this->getIncludeFile();
+    private function updateSatisFile() {
+        $data = $this->getSatisFile();
 
         $data = json_decode($data, true);
-        $data["name"] = $this->params["name"];
-        $data["homepage"] = $this->params["homepage"];
         $data['repositories'] = $this->getRepos();
+        $data['output-dir'] = $this->params['output-dir'] ? $this->params['output-dir'] : $data['output-dir'];
 
-        $fp = fopen($this->getIncludeFilePath(), 'w');
+        $fp = fopen($this->getSatisFilePath(), 'w');
         fwrite($fp, json_encode($data, JSON_PRETTY_PRINT));
         fclose($fp);
     }
 
 
-    private function getIncludeFilePath() {
-        return $this->params["filepath"] . FILE;
+    private function getSatisFilePath() {
+        return $this->params["rootpath"] . Builder::SATIS_FILENAME;
     }
 
-    private function getIncludeBaseFilePath() {
-        return __DIR__ . "/../" . BASEFILE;
+    private function getSatisBaseFilePath() {
+        return __DIR__ . "/../" . Builder::SATIS_BASE_FILENAME;
     }
 
-    private function getIncludeFile() {
-        try {
-            $data = file_get_contents($this->getIncludeFilePath());
-        } catch(\Exception $e) {
-            $data = file_get_contents($this->getIncludeBaseFilePath());
-        }
-
-        return $data;
+    private function getSatisFile() {
+        return file_get_contents($this->getSatisBaseFilePath());
     }
 
     private function getRepos() {
@@ -54,7 +44,7 @@ class FileBuilder
             empty($this->params['oauth']['oauth_consumer_secret']) ||
             empty($this->params['team'])
         ) {
-            return;
+            return [];
         }
 
         $repo = new \Bitbucket\API\Repositories();
@@ -108,9 +98,9 @@ class FileBuilder
         }
     }
 
-    public function loadGuzzleFunctions($composer)
+    public function loadGuzzleFunctions()
     {
-        require_once $composer->getConfig()->get('vendor-dir') . "/guzzlehttp/psr7/src/functions_include.php";
+        require_once $this->params['rootpath'] . "/vendor/guzzlehttp/psr7/src/functions_include.php";
     }
 
 }

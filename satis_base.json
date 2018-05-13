@@ -1,0 +1,7 @@
+{
+    "name": "Satis",
+    "homepage": "http://packages.example.org",
+    "repositories": [],
+    "require-all": true,
+    "output-dir": "dist"
+}

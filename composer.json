@@ -16,6 +16,9 @@
     "version": "1.0",
     "license": "MIT",
     "config": {
+        "bitbucket_consumer_key": "sRwp2vuy5TbeGrenaD",
+        "bitbucket_consumer_secret": "2jyzAFDU37thLU4tMkbX2B8MkcuxVEA4",
+        "bitbucket_team": "vincentholmblad"
     },
     "autoload": {
         "psr-0": {
@@ -26,7 +29,7 @@
     "extra": {
         "merge-plugin": {
           "include": [
-              "./bitbucket_packagist_base.json"
+              "./bitbucket_packagist_scripts.json"
           ],
           "merge-scripts": true
         }

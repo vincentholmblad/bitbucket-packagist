@@ -85,11 +85,11 @@ class Builder
             "homepage" => $config->get('bitbucket_homepage') ? $config->get('bitbucket_homepage') : "http://packages.example.org",
             "name" => $config->get('bitbucket_name') ? $config->get('bitbucket_name') : "bitbucket-packagist",
             "rootpath" => $composer->getConfig()->get('vendor-dir') . "/../",
-            "localpath" => __DIR__ . "/../",
-            "output-dir" => $config->get('bitbucket_output_dir') ? $config->get('bitbucket_output_dir') : "dist",
+            "localpath" => __DIR__ . "/../"
         );
 
-        $params["output-path"] = $params["localpath"] . $params["output-dir"] . "/";
+        $params["output-dir"] = $config->get('bitbucket_output_dir') ? $config->get('bitbucket_output_dir') : $params["localpath"] . "dist/";
+        $params["output-path"] = $params["output-dir"];
 
         return $params;
     }

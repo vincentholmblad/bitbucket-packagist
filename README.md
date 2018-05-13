@@ -10,7 +10,7 @@ The project has two main functions:
 Installation
 ============
 
-`composer require vincentholmblad/bitbucket_packagist`
+`composer require vincentholmblad/bitbucket-packagist`
 
 Add these lines to composer.json after you've installed the package.
 
@@ -27,7 +27,7 @@ Add these lines to composer.json after you've installed the package.
 extra: {
     "merge-plugin": {
         "include": [
-            "./vendor/vincentholmblad/bitbucket_packagist/bitbucket_packagist_base.json",
+            "./vendor/vincentholmblad/bitbucket-packagist/bitbucket_packagist_base.json",
             "./bitbucket_packagist.json"
         ],
         "merge-scripts": true

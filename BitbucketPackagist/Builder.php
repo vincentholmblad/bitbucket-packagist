@@ -21,7 +21,7 @@ class Builder
             ),
             "team" => $config->get('bitbucket_team'),
             "homepage" => $config->get('bitbucket_homepage') ? $config->get('bitbucket_homepage') : "http://packages.example.org",
-            "name" => $config->get('bitbucket_name') ? $config->get('bitbucket_name') : "bitbucket_packagist",
+            "name" => $config->get('bitbucket_name') ? $config->get('bitbucket_name') : "bitbucket-packagist",
             "filepath" => $composer->getConfig()->get('vendor-dir') . "/../"
         );
 

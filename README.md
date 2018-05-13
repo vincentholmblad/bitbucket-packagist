@@ -5,7 +5,7 @@ A simple library that automatically creates a local packagist for private reposi
 The project has two main functions:
 
 1. Creates a json file with auto-generated repositories (vcs) from a user or team on BitBucket that can be merged into an existing composer.json file. This is almost like having a local version of a Private Packagist.
-2. Takes the auto-generated json file to also create a static composer repository (through [Satis]("https://github.com/composer/satis")) that can be uploaded to a server and served to other projects.
+2. Takes the auto-generated json file to also create a static composer repository (through [Satis](https://github.com/composer/satis)) that can be uploaded to a server and served to other projects.
 
 Installation
 ============
@@ -37,7 +37,7 @@ extra: {
 
 Then run `composer run-script bb_composer_packages` whenver you need to update your local packagist.
 
-If you want to automatically update the local packagist with any changes then also include this to your composer.json. **NOT RECOMMENDED!** This will make the process of updating and installing new packages very slow as the process has to check load composer.json files from all your private repositories to build the packages.json file.
+**NOT RECOMMENDED!** If you want to automatically update the local packagist with any changes then also include this to your composer.json. This will make the process of updating and installing new packages very slow as the process has to check load composer.json files from all your private repositories to build the packages.json file.
 
 ```json
 // Automatically update local private packagist

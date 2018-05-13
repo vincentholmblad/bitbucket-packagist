@@ -85,6 +85,8 @@ class FileBuilder
             "url" => $ssh
             );
         }
+
+        print("Found " . count($totalRows) . " repositories!\n");
         
         return $return;
     

@@ -42,7 +42,10 @@ If you want to automatically update the local packagist with any changes then al
 ```json
 // Automatically update local private packagist
 "scripts": {
-    "pre-package-install": [
+    "pre-update-cmd": [
+        "@bb_include_packages"
+    ],
+    "pre-install-cmd": [
         "@bb_include_packages"
     ]
 }

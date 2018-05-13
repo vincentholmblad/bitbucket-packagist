@@ -25,6 +25,8 @@ class Builder
             "filepath" => $composer->getConfig()->get('vendor-dir') . "/../"
         );
 
+        print("Updating local private packagist...\n");
+
         new FileBuilder($params, $composer);
 
     }

@@ -1,8 +1,8 @@
 {
-    "name": "vincentholmblad/bitbucket_packagist",
+    "name": "vincentholmblad/bitbucket-packagist",
     "description": "A simple package that automatically creates an includable composer file with all repositories of a bitbucket user or team.",
     "type": "library",
-    "homepage": "https://github.com/vincentholmblad/bitbucket_packagist",
+    "homepage": "https://github.com/vincentholmblad/bitbucket-packagist",
     "authors": [
         {
             "name": "Vincent Holmblad",

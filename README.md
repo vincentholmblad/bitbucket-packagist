@@ -27,31 +27,31 @@ Add these lines to composer.json after you've installed the package.
 extra: {
     "merge-plugin": {
         "include": [
-            "./vendor/vincentholmblad/bitbucket-packagist/bitbucket_packagist_base.json",
-            "./bitbucket_packagist.json"
+            "./vendor/vincentholmblad/bitbucket-packagist/bitbucket_packagist_scripts.json",
+            "./vendor/vincentholmblad/bitbucket-packagist/packages.json"
         ],
         "merge-scripts": true
     }
 }
 ```
 
-Then run `composer run-script bb_include_packages` whenver you need to update your local packagist.
+Then run `composer run-script bb_composer_packages` whenver you need to update your local packagist.
 
-If you want to automatically update the local packagist with any changes then also include this to your composer.json.
+If you want to automatically update the local packagist with any changes then also include this to your composer.json. **NOT RECOMMENDED!** This will make the process of updating and installing new packages very slow as the process has to check load composer.json files from all your private repositories to build the packages.json file.
 
 ```json
 // Automatically update local private packagist
 "scripts": {
     "pre-update-cmd": [
-        "@bb_include_packages"
+        "@bb_composer_packages"
     ],
     "pre-install-cmd": [
-        "@bb_include_packages"
+        "@bb_composer_packages"
     ]
 }
 ```
 
-If you want to upload the result to a server then run `composer run-script bb_composer_packages` and upload the resulting folder *("./bitbucket_packagist_dist/")* to your hosting-service of choice. You can then include your new private packagist with this code in your composer.json.
+If you want to upload the result to a server then run `composer run-script bb_composer_packages` and upload the resulting folder *("./dist/" inside the package directory in vendor)* to your hosting-service of choice. You can then include your new private packagist with this code in your composer.json.
 
 ```json
 // Load repositores from private packagist

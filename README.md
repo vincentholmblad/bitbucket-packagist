@@ -4,8 +4,8 @@ A simple library that automatically creates a local packagist for private reposi
 
 The project has two main functions:
 
-1.) Creates a json file with auto-generated repositories (vcs) from a user or team on BitBucket that can be merged into an existing composer.json file. This is almost like having a local version of a Private Packagist.
-2.) Takes the auto-generated json file to also create a static composer repository (through [Satis]("https://github.com/composer/satis")) that can be uploaded to a server and served to other projects.
+1. Creates a json file with auto-generated repositories (vcs) from a user or team on BitBucket that can be merged into an existing composer.json file. This is almost like having a local version of a Private Packagist.
+2. Takes the auto-generated json file to also create a static composer repository (through [Satis]("https://github.com/composer/satis")) that can be uploaded to a server and served to other projects.
 
 Installation
 ============
@@ -37,10 +37,39 @@ extra: {
 
 Then run `composer run-script bb_include_packages` whenver you need to update your local packagist.
 
-If you want to upload the result to a server then run `composer run-script bb_composer_packages` and upload the resulting folder ("./bitbucket_packagist_dist/") to your hosting-service of choice.
+If you want to automatically update the local packagist with any changes then also include this to your composer.json.
+
+```json
+// Automatically update local private packagist
+"scripts": {
+    "pre-package-install": [
+        "@bb_include_packages"
+    ]
+}
+```
+
+If you want to upload the result to a server then run `composer run-script bb_composer_packages` and upload the resulting folder *("./bitbucket_packagist_dist/")* to your hosting-service of choice. You can then include your new private packagist with this code in your composer.json.
+
+```json
+// Load repositores from private packagist
+"repositories": [
+    {
+        "type": "composer",
+        "url": "link to uploaded position"
+    }
+]
+```
 
 Sidenote for repositories
 =========================
 
-Make sure that every repository that you want to include has its own composer.json with at least a name field.
-This namefield should match the name of the repository.
+Make sure that every repository that you want to include has its own composer.json with at least a name and a version field. This namefield should match the name of the repository.
+
+An example below.
+
+```json
+{
+    "name": "your-shorthand/repo-name",
+    "version": "master"
+}
+```

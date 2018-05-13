@@ -1,0 +1,16 @@
+{
+    "name": "bitbucket_packagist",
+    "homepage": "http://packages.example.org",
+    "repositories": [],
+    "require-all": true,
+    "output-dir": "bitbucket_packagist_dist",
+    "scripts": {
+        "bb_include_packages": [
+            "BitbucketPackagist\\Builder::build"
+        ],
+        "bb_composer_packages": [
+            "@bb_include_packages",
+            "@php vendor/composer/satis/bin/satis build"
+        ]
+    }
+}

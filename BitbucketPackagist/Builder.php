@@ -26,8 +26,6 @@ class Builder
 
         $params = self::getParams($event);
 
-        print($params['output-path'] . "include/");
-
         $files = scandir($params['output-path'] . "include/"); 
 
         $data;

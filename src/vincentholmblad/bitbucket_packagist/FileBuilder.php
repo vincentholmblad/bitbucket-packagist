@@ -1,15 +1,15 @@
 <?php
 
-namespace BitbucketPackagist;
+namespace vincentholmblad\bitbucket_packagist;
 
 class FileBuilder
 {
 
     private $params;
 
-    public function __construct($params, $composer) {
+    public function __construct($params) {
         $this->params = $params;
-        $this->loadGuzzleFunctions($composer);
+        $this->loadGuzzleFunctions();
         $this->updateSatisFile();
     }
 

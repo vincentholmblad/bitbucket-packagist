@@ -1,6 +1,6 @@
 <?php
 
-namespace BitbucketPackagist;
+namespace vincentholmblad\bitbucket_packagist;
 
 use Composer\Script\Event;
 use Composer\Installer\PackageEvent;
@@ -16,15 +16,27 @@ class Builder
 
     const PACKAGES_BASE_FILENAME = "packages_base.json";
 
-    public static function update(Event $event)
+    public static function postInstall(PackageEvent $event)
     {
-        $composer = $event->getComposer();
+        $installedPackage = $event->getOperation()->getPackage();
 
-        $config = $composer->getConfig();
+        if($installedPackage == "gentle/bitbucket-api-1.1.0.0") {
+
+            $params = self::getParams($event);
+
+            self::build(null, $params);
+            echo 'autoload: '.exec('composer dump-autoload');
+            $event->getComposer()->getEventDispatcher()->dispatch('satis');
+            self::update(null, $params);
+        }
+    }
+
+    public static function update(Event $event = null, $params = null)
+    {
 
         print("Updating local private packagist...\n");
 
-        $params = self::getParams($event);
+        $params = $params ? $params : self::getParams($event);
 
         $files = scandir($params['output-path'] . "include/"); 
 
@@ -56,19 +68,18 @@ class Builder
         }
     }
 
-    public static function build(Event $event)
+    public static function build(Event $event = null, $params = null)
     {
-        $composer = $event->getComposer();
-
-        $config = $composer->getConfig();
 
         print("Creating local private packagist...\n");
 
-        new FileBuilder(self::getParams($event), $composer);
+        $params = $params ? $params : self::getParams($event);
+
+        new FileBuilder($params);
 
     }
 
-    public static function getParams(Event $event)
+    public static function getParams($event)
     {
         $composer = $event->getComposer();
 

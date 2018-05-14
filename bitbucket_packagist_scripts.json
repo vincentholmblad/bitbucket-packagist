@@ -3,10 +3,10 @@
     "repositories": [],
     "scripts": {
         "bb_include_packages": [
-            "BitbucketPackagist\\Builder::build"
+            "vincentholmblad\\bitbucket_packagist\\Builder::build"
         ],
         "bb_composer_update": [
-            "BitbucketPackagist\\Builder::update"
+            "vincentholmblad\\bitbucket_packagist\\Builder::update"
         ],
         "bb_composer_packages": [
             "@bb_include_packages",

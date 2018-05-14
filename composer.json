@@ -1,7 +1,7 @@
 {
     "name": "vincentholmblad/bitbucket-packagist",
-    "description": "A simple library that automatically creates a local packagist for private repositories hosted on BitBucket.",
-    "type": "library",
+    "description": "A simple composer plugin that automatically creates a local packagist for private repositories hosted on BitBucket.",
+    "type": "composer-plugin",
     "homepage": "https://github.com/vincentholmblad/bitbucket-packagist",
     "authors": [
         {
@@ -22,11 +22,14 @@
     },
     "autoload": {
         "psr-0": {
-            "BitbucketPackagist\\Builder": "",
-            "BitbucketPackagist\\FileBuilder": ""
+            "vincentholmblad\\bitbucket_packagist\\BitbucketPackagistPlugin": "src/",
+            "vincentholmblad\\bitbucket_packagist\\Builder": "src/",
+            "vincentholmblad\\bitbucket_packagist\\FileBuilder": "src/",
+            "vincentholmblad\\bitbucket_packagist\\CommandProvider": "src/"
         }
     },
     "extra": {
+        "class": "vincentholmblad\\bitbucket_packagist\\BitbucketPackagistPlugin",
         "merge-plugin": {
           "include": [
               "./bitbucket_packagist_scripts.json"
@@ -35,6 +38,7 @@
         }
     },
     "require": {
+        "composer-plugin-api": "^1.1",
         "gentle/bitbucket-api": "^1.1",
         "kriswallsmith/buzz": "^0.16",
         "composer/satis": "^1.0",
